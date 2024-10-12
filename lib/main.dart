@@ -27,8 +27,8 @@ class MyApp extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(32),
                   child: Image.network(
-                    "https://i.ibb.co/nngK6j3/startup.png",
-                    width: 81,
+                    "https://bslj.konicaminolta.com/KonicaMinolta/imageWrite.do?image_number=1&dm=1728715455097",
+                    width: 300,
                   ),
                 ),
                 SnackBarPage()
@@ -42,20 +42,24 @@ class MyApp extends StatelessWidget {
 }
 
 class SnackBarPage extends StatelessWidget {
-  const SnackBarPage({super.key});
-
+  SnackBarPage({super.key});
+  final idController = TextEditingController();
+  final pwController = TextEditingController();
+  String statusmessage = '';
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Column(
         children: [
           TextField(
+            controller: idController,
             decoration: InputDecoration(
               labelText: '이메일',
             ),
           ),
           TextField(
             obscureText: true,
+            controller: pwController,
             decoration: InputDecoration(
               labelText: '비밀번호',
             ),
@@ -65,8 +69,17 @@ class SnackBarPage extends StatelessWidget {
             margin: EdgeInsets.only(top: 24),
             child: ElevatedButton(
               onPressed: () {
+                if (idController.text == 'nana') {
+                  if (pwController.text == '1') {
+                    statusmessage = 'login';
+                  } else {
+                    statusmessage = 'pw error';
+                  }
+                } else {
+                  statusmessage = 'id error';
+                }
                 final snackBar = SnackBar(
-                  content: const Text('기능 미구현!'),
+                  content: Text(statusmessage),
                   action: SnackBarAction(
                     label: '닫기',
                     onPressed: () {
